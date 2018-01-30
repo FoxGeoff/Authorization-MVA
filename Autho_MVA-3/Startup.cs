@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Autho_MVA_3.Data;
 using Autho_MVA_3.Services;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace Autho_MVA_3
 {
@@ -33,6 +34,11 @@ namespace Autho_MVA_3
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthorization(config => {
+                config.AddPolicy("CanadiansOnly", policy => policy.RequireClaim(ClaimTypes.Country, "Canada"));
+                
+                });
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Autho_MVA_3.Pages
 {
-    [Authorize(Roles ="Admin") ]
+    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "CanadiansOnly")]
     public class AboutModel : PageModel
     {
         public string Message { get; set; }

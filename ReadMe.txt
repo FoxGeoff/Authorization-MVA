@@ -19,3 +19,15 @@ Task#: Autho_MSV Added line:
 
 	More Refs:https://github.com/blowdart/IgniteDotNetConf
 	More Video: https://channel9.msdn.com/Events/dotnetConf/2017/T324#comments
+
+	*************************************
+	* Note: we are now starting the project automaticaly with > dotnet watch run
+	* We are using in development an in memory database
+	*************************************
+
+	* Roles: [Authorize(Roles ="Admin")]
+	*************************************
+
+	* Policies: Claim based rights [Authorize(Policy="CanadiansOnly")]
+	*************************************
+

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Autho_MVA_3.Data;
+using System.Security.Claims;
 
 namespace Autho_MVA_3
 {
@@ -44,6 +45,12 @@ namespace Autho_MVA_3
                 };
                 await userManager.CreateAsync(user, "Passw0rd!");
                 logger.LogInformation($"==> Created user geoff@test.com with Password Passw0rd!");
+
+                await userManager.AddToRoleAsync(user, "Admin");
+                logger.LogInformation($"==> User geoff@test.com is now an Admin!");
+
+                await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Country, "Canada"));
+                logger.LogInformation($"==> User geoff@test.com is now Canadian Aye!");
             }
         }
     }
