@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Autho_MVA_3.Data;
 using Autho_MVA_3.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Autho_MVA_3
 {
@@ -27,7 +28,7 @@ namespace Autho_MVA_3
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseInMemoryDatabase("SampleData"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -46,7 +47,7 @@ namespace Autho_MVA_3
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -62,6 +63,8 @@ namespace Autho_MVA_3
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            await SampleData.InitializeData(app.ApplicationServices, loggerFactory);
 
             app.UseMvc(routes =>
             {
