@@ -38,6 +38,8 @@ namespace Autho_MVA_3
             services.AddAuthorization(config => {
                 config.AddPolicy("CanadiansOnly", policy => policy.RequireClaim(ClaimTypes.Country, "Canada"));
                 
+                config.AddPolicy("CanadianOrAdmin", policy => policy.AddRequirements(new CanadianRequirement()));
+
                 });
 
             services.AddMvc()

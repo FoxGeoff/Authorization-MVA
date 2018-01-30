@@ -31,3 +31,9 @@ Task#: Autho_MSV Added line:
 	* Policies: Claim based rights [Authorize(Policy="CanadiansOnly")]
 	*************************************
 
+	* Policies: Requirements Class
+	*************************************
+
+	* Hide/Show content (ie Menu Links)
+	*************************************
+
